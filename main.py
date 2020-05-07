@@ -82,7 +82,7 @@ while True:
 	for event in pg.event.get():
 		if event.type == pg.QUIT:
 			#plotting
-			plt.plot(days, Ns, label = 'Unaffacted', color='blue')
+			plt.plot(days, Ns, label = 'Unaffacted + Undetected', color='blue')
 			plt.plot(days, Ni, label = 'Infected with symptoms', color='red')
 			plt.plot(days, Nr, label = 'Recovered among detected',color='green')
 			plt.legend()
@@ -100,10 +100,17 @@ while True:
 	for p in pop:
 		if p.condition == 'S':
 			ns += 1
-		elif p.condition == 'I' and p.symptoms:
-			ni += 1
-		elif p.condition == 'R' and p.symptoms:
-			nr += 1
+		elif p.condition == 'I':
+			if p.symptoms:
+				ni += 1
+			else:
+				ns += 1
+		elif p.condition == 'R':
+			if p.symptoms:
+				nr += 1
+			else:
+				ns += 1
+
 	Ns.append(ns)
 	Nr.append(nr)
 	Ni.append(ni)
