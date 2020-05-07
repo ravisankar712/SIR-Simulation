@@ -84,7 +84,7 @@ while True:
 			#plotting
 			plt.plot(days, Ns, label = 'Unaffacted', color='blue')
 			plt.plot(days, Ni, label = 'Infected with symptoms', color='red')
-			plt.plot(days, Nr, label = 'Recovered',color='green')
+			plt.plot(days, Nr, label = 'Recovered among detected',color='green')
 			plt.legend()
 			plt.suptitle('SIR Model')
 			plt.xlabel('Time (in days)')
@@ -102,7 +102,7 @@ while True:
 			ns += 1
 		elif p.condition == 'I' and p.symptoms:
 			ni += 1
-		else:
+		elif p.condition == 'R' and p.symptoms:
 			nr += 1
 	Ns.append(ns)
 	Nr.append(nr)
